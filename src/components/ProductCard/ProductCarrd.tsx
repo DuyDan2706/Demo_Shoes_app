@@ -17,7 +17,7 @@ export default function ProductCarrd({prod} : Props) {
      
        <img className='w-100' src={prod.image} alt=""/>
        <div className='card-body'>
-           <h2 className='card-title'>{prod.name}</h2>
+           <h2 className='card-title ' style={{fontSize:20}}>{prod.name}</h2>
            <p>{prod.shortDescription}</p>
        </div>
        <div className=' d-flex'>

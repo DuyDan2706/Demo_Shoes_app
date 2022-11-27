@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
+import { type } from '@testing-library/user-event/dist/type'
 import productReducer from './ProductReducer/productReducer'
 
 export const store = configureStore({
@@ -11,7 +12,16 @@ export const store = configureStore({
 })
 export type RootState = ReturnType<typeof store.getState>
 
+export type DispatchType = typeof store.dispatch
 export default store
+
+
+
+
+
+
+
+
 // khi set up v nó đã có thunk  devtool
 // bổ sung kiểu dữ lieuj cho store 
 
