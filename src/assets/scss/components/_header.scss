@@ -1,0 +1,52 @@
+
+.header{
+   
+    
+.logo-header{
+    background-color: black;
+     height: 50px;
+    display:flex ;
+
+    //từ trái qua
+    justify-content: space-between;  // chia đều sang 2 bên
+    align-items: center;
+  .logo {  
+     color: red;
+    object-fit: contain;
+  }
+.nav-bar-serch{
+    display: flex;
+    justify-content: center;
+    .flex-item{
+        margin-left:15px ;
+       
+        a{
+            text-decoration: none;
+            color: #fff;
+            font-size: 20px;
+            font-weight: 300px;
+         transition: all 0.3s;
+         &:hover{
+            color: red;
+    }
+        }
+       
+    }
+}
+
+}
+.menu {
+    min-height: 75px;
+    background-color: rgb(201, 197, 197) ;
+   
+  .nav-menu{
+    a {
+        text-decoration: none;
+        color: rgb(103,100,100);
+        &:hover{
+            color: red;
+        }
+    }
+  }
+}
+}
