@@ -10,7 +10,7 @@ export default function HomeTemplate({}: Props) {
      <Header/>
       {/*  outlet là phần dùng chung */}
       <Outlet />  
-    {/* <Footer/> */}
+    <Footer/>
 
   </>
   )
