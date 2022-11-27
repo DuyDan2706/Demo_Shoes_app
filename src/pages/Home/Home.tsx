@@ -7,7 +7,7 @@ type Props = {}
 
 export default function Home({}: Props) {
 
-const {arrProduct} = useSelector((state:RootState)=>state.productReducer);
+const {arrProduct} = useSelector((state:RootState)=>state.product);
 
 console.log(arrProduct)
 const dispatch:DispatchType =useDispatch();
