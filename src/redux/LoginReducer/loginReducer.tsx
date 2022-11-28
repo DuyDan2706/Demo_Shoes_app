@@ -15,7 +15,7 @@ export interface SignupModel   {
     email: string;
     password: string;
     name:  string;
-    gender: boolean;
+    gender: boolean;  
     phone: number;
     
 }

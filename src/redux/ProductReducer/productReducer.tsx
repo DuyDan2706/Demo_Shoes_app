@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { type } from '@testing-library/user-event/dist/type';
 import axios from 'axios';
 import { DispatchType } from '../ConfigStore';
@@ -19,19 +19,51 @@ export interface ProductModel   {
     feature: boolean;
     image: string;
 }
+export interface productDetailModel {
+  id:               number;
+  name:             string;
+  alias:            string;
+  price:            number;
+  feature:          boolean;
+  description:      string;
+  size:             string[];
+  shortDescription: string;
+  quantity:         number;
+  image:            string;
+  categories:       Category[];
+  relatedProducts:  RelatedProduct[];
+}
+
+export interface Category {
+  id:       string;
+  category: string;
+}
+
+export interface RelatedProduct {
+  id:               number;
+  name:             string;
+  alias:            string;
+  feature:          boolean;
+  price:            number;
+  description:      string;
+  shortDescription: string;
+  image:            string;
+}
 
 
 // khai báo thuộc tính bên trong
 export type ProductState = {
     // product sẽ hiện lên giao diện diện sẽ gọi là ProductModel hoặc ProductViewModel tùy thuocj vào team
     arrProduct:ProductModel[]
+
+    //tạo thêm 1 productDetail cho trang detail
+    productDetail:productDetailModel|null
 }
 
 
 const initialState:ProductState = {
-    arrProduct: [   
-    
-    ] // js khai báo rỗng thì ok còn ts thì phải khai báo 
+    arrProduct: [   ], // js khai báo rỗng thì ok còn ts thì phải khai báo 
+    productDetail:null
 
 }
 
@@ -44,14 +76,41 @@ const productReducer = createSlice({
             state.arrProduct = action.payload
           }
 
+  },
+  // cách 2 createAction
+  extraReducers(builder){
+
+    // pending : trạng thái
+    // fulfilled : đã sữ lí thành công
+    //rejected: thất bại
+    builder.addCase(getProductDetailApi.pending, (state,action)=>{
+   // bật loading
+          
+    });
+    builder.addCase(getProductDetailApi.fulfilled, (state:ProductState,action:PayloadAction<productDetailModel>)=>{
+  // tắt loading
+  state.productDetail= action.payload;
+    });
+    builder.addCase(getProductDetailApi.rejected, (state,action)=>{
+      
+    });
   }
 });
+
+
+
+/* 
+   const action = {
+    type:'productReducer/setArrProduction'
+    payload:[]
+   }
+*/
 
 export const {setArrProductAction} = productReducer.actions
 
 export default productReducer.reducer
 
-/* ---------------------action api ..................*/
+/* ---------------------action api async action ..................*/
 export const getProductApi = ()=>{
     return async (dispatch:DispatchType) =>{
           
@@ -78,6 +137,36 @@ export const getProductApi = ()=>{
    }
    
   
+
+// cách 2:createAction
+
+export const getProductDetailApi = createAsyncThunk (
+  'productReducer/getProductDetailApi',
+  async (id: string) => {
+    const response = await axios({
+      url:`https://shop.cyberlearn.vn/api/Product/getbyid?id=${id}`,
+      method:'GET'
+    })
+
+    return response.data.content; // trả dữ liệu Product DetailModel
+  })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

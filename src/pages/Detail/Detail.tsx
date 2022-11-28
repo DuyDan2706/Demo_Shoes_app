@@ -1,9 +1,71 @@
-import React from 'react'
+import { Action } from '@remix-run/router'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import ProductCarrd from '../../components/ProductCard/ProductCarrd'
 
-type Props = {}
+import { DispatchType, RootState } from '../../redux/ConfigStore'
+import { getProductDetailApi, RelatedProduct } from '../../redux/ProductReducer/productReducer'
+
+type Props = {
+
+
+
+}
 
 export default function Detail({}: Props) {
+
+   //bóc tách dữ liệu
+   const {productDetail} = useSelector((state:RootState)=> state.product)
+   console.log(productDetail)
+    const params=useParams();
+    const dispatch:DispatchType = useDispatch();
+
+  const getProductByIdApi = () =>{
+  // lấy param tư url 
+  const id:string|undefined = params.id
+  // b2: Dispatch thunk 
+   const actionThunk=getProductDetailApi(id as string);
+   dispatch(actionThunk)
+  }
+
+
+   useEffect (()=>{
+
+    getProductByIdApi();
+
+   },[params.id])
+
+
+
   return (
-    <div>Detail</div>
+    <div className='container'>
+  {/* <h3> Product Name</h3> */}
+  < div className='row mt-2'>
+    <div className='col-4'>
+    <img src={productDetail?.image} alt='...' height={350} width={350} style={{objectFit:'cover'}} />
+    </div>
+    <div className='col-8'>
+        
+    <h3>{productDetail?.name}</h3>
+      <p>{productDetail?.description}</p>
+    </div>
+
+
+  </div>
+   <h3 className='mt-2 text-center'> --Product Feature---</h3>
+   <div className='row'>
+    {productDetail?.relatedProducts.map((prod:RelatedProduct , index : number)=>{
+      return  <div className='col-4'>
+      <ProductCarrd prod={prod} />
+    </div>
+    })}
+   
+    
+   </div>
+    </div>
+
+
+   
   )
 }
