@@ -7,10 +7,11 @@ type Props = {}
 export default function HomeTemplate({}: Props) {
   return (
   <>
-     <Header/>
-      {/*  outlet là phần dùng chung */}
-      <Outlet />  
-    <Footer/>
+      <Header />
+        <main style={{minHeight:600}}>
+        <Outlet />
+        </main>
+        <Footer />
 
   </>
   )
