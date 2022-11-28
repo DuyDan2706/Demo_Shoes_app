@@ -64,7 +64,10 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
   return (
     <div>
         <form onSubmit={handleSubmit}>
-            <TextField
+        {touched.email && errors.email && (
+              <div>{errors.email}</div>
+            )}
+           <TextField
               margin="normal"
               required
               fullWidth
@@ -78,8 +81,8 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                     onBlur={handleBlur}
                     value={values.email}
             />
-            {touched.email && errors.email && (
-              <div>{errors.email}</div>
+            {touched.password && errors.password && (
+              <div >{errors.password}</div>
             )}
             <TextField
               margin="normal"
@@ -95,9 +98,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
               onBlur={handleBlur}
               value={values.password}
             />
-            {touched.password && errors.password && (
-              <div >{errors.password}</div>
-            )}
+           
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
@@ -113,9 +114,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
+               
               </Grid>
               <Grid item>
                 <Link href="#" variant="body2">

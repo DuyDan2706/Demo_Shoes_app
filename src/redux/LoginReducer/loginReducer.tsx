@@ -7,41 +7,41 @@ import { DispatchType } from '../ConfigStore';
 export interface LoginState   {
     isLoggedIn: boolean;
     logging?: boolean;
-    email: string  | undefined;
-    accessToken: string| undefined;
+    email?: string ;
+    accessToken?: string;
 }
 
-export interface SignupModel   {
-    email: string;
-    password: string;
-    name:  string;
-    gender: boolean;  
-    phone: number;
-    
-}
+
 export interface SigninModel   {
     email?: string;
     password?: string;
-   
 }
 
 // khai báo thuộc tính bên trong
-export type SiginupState = {
     // product sẽ hiện lên giao diện diện sẽ gọi là ProductModel hoặc ProductViewModel tùy thuocj vào team
-    signup: SignupModel
-}
+
 export type SigininState = {
     // product sẽ hiện lên giao diện diện sẽ gọi là ProductModel hoặc ProductViewModel tùy thuocj vào team
     signin: SigninModel
 }
 
+const accessToken = localStorage.getItem("token")
+const email = localStorage.getItem("email")
+console.log("localstorage", email, accessToken)
+const initialState: LoginState = accessToken && email ? {
+   isLoggedIn: true,
+   logging: true,
+   email: email,
+   accessToken: accessToken
+} : {
+  isLoggedIn: false,
+  logging: false,
+  email: undefined,
+  accessToken: undefined
+}
 
-const initialState: LoginState = {
-   isLoggedIn: false,
-   logging: false,
-   email: undefined,
-   accessToken: undefined
-};
+
+
 
 const loginReducer = createSlice({
   name: 'loginReducer',
@@ -68,16 +68,14 @@ const loginReducer = createSlice({
            state.email = undefined
            localStorage.removeItem('token');
            localStorage.removeItem('email');
-         } ,
+         } , 
   }
 });
 
 export const LoginAction = loginReducer.actions
 
-export const selectIsLoggedIn = (state: any) => state.loginReducer.isLoggedIn;
-export const selectIsLogging = (state: any) => state.loginReducer.logging;
+export default loginReducer.reducer 
 
-export default loginReducer.reducer
 
 
 /* ---------------------action api ..................*/
@@ -98,10 +96,12 @@ export const postSigninApi = (data : SigninModel )=>{
              
         }catch(err){
             console.log("ngu ne", err)
-            alert("Tài Khoản Or Mật Khẩu sai")
+            alert("Tài khoản or mật khẩu sai")
         }
     }
    }
+
+
 
 //rcslice
 

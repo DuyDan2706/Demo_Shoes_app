@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { type } from '@testing-library/user-event/dist/type'
 import loginReducer from './LoginReducer/loginReducer'
+import SignupReducer from './LoginReducer/SignupReducer'
 import productReducer from './ProductReducer/productReducer'
 
 export const store = configureStore({
@@ -8,6 +9,7 @@ export const store = configureStore({
     // number: (state=1)=>{
     //     return state
     // }
+    signup: SignupReducer,
     login: loginReducer,
     product: productReducer
   },
