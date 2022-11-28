@@ -45,10 +45,12 @@ export default function Detail({}: Props) {
     <div className='col-4'>
     <img src={productDetail?.image} alt='...' height={350} width={350} style={{objectFit:'cover'}} />
     </div>
-    <div className='col-8'>
+    <div className='col-8 mt-4'>
         
-    <h3>{productDetail?.name}</h3>
-      <p>{productDetail?.description}</p>
+    <h3 className='mt-4 '> Name:{productDetail?.name}</h3>
+    <p className='mt-4'> Alias :{productDetail?.alias}</p>
+     <p className='mt-4'> price :{productDetail?.price}</p>
+      <p className='mt-4'>description:{productDetail?.description}</p>
     </div>
 
 
