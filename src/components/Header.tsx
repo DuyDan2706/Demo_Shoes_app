@@ -27,7 +27,7 @@ useEffect(() => {
       <div className='nav-bar-serch'>
 
      <div className='login flex-item'>
-     <NavLink className={'login-link'} to= {'/login'}>
+     <NavLink className={'login-link'} to= {'/profile'}>
              {localStorage.getItem("email")}
      </NavLink>
      </div>
@@ -68,7 +68,7 @@ useEffect(() => {
     <div className='header' >
         <section className='logo-header'>
          <div className='logo'>
-        Dan Khoa
+        DanKhoa
          </div>
              {adminDashboard}
         </section>
