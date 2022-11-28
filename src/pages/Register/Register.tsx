@@ -226,7 +226,7 @@ let navigate = useNavigate();
 useEffect(() => {
   // if isUserLoggedIn turned to true redirect to /home
   if (status == true) {
-    navigate("/login"); 
+    navigate("/login", { replace: true }); 
  }
 }, [status]); // triggers when isUserLoggedIn changes
 

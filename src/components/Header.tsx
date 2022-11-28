@@ -25,7 +25,16 @@ useEffect(() => {
   if (localStorage.getItem(`token`)) {
     adminDashboard = (
       <div className='nav-bar-serch'>
-
+ <div className='search flex-item'>
+            <NavLink className={'search-link'} to= {'/search'}>
+       <i className='fa fa-search'/> search
+            </NavLink>
+           </div>
+          <div className='carts flex-item'>
+          <NavLink className={'carts-link'} to= {'/cart'}>
+          <i className='fa fa-cart-plus'/> cart
+          </NavLink>
+          </div>
      <div className='login flex-item'>
      <NavLink className={'login-link'} to= {'/profile'}>
              {localStorage.getItem("email")}
