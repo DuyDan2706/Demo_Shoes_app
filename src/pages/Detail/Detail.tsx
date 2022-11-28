@@ -53,7 +53,7 @@ export default function Detail({}: Props) {
 
 
   </div>
-   <h3 className='mt-2 text-center'> --Product Feature---</h3>
+   <h3 className='mt-2 text-center'> --Related Products---</h3>
    <div className='row'>
     {productDetail?.relatedProducts.map((prod:RelatedProduct , index : number)=>{
       return  <div className='col-4'>
