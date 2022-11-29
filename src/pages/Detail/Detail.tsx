@@ -101,7 +101,8 @@ export default function Detail({}: Props) {
               </div>);
   };
   const numberRegExp = /^[0-9]+$/
-
+  const {arrCart} = useSelector((state:RootState)=>state.cart);
+  const exist =  arrCart.find(item => item.id === productDetail?.id)
   const LoginForm = withFormik<MyFormProps, FormValues>({
   
     mapPropsToValues:(props) => ({
@@ -109,8 +110,9 @@ export default function Detail({}: Props) {
      
     }),
     validationSchema: Yup.object().shape({
-      quantity: Yup.number().max(productDetail?.quantity ? productDetail?.quantity : 10, "Quantity quá lớn").min(1, "Quantity is valid")
-    
+      quantity: Yup.number().max( exist ? (productDetail?.quantity ? productDetail?.quantity - exist.quantity   : 10) 
+                                        : productDetail?.quantity ? productDetail?.quantity : 10,
+                                         "Quantity quá lớn").min(1, "Quantity is valid")
     }),
     handleSubmit(
       {quantity}: FormValues,
@@ -120,7 +122,9 @@ export default function Detail({}: Props) {
    { quantity: parseInt(quantity),
     name: productDetail?.name,
     price: productDetail?.price,
-    id: productDetail?.id}
+    id: productDetail?.id,
+    image: productDetail?.image,
+    quantityInShop: productDetail?.quantity}
       ))
      },
   })(InnerForm);

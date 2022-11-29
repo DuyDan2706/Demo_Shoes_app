@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { RootState } from "../redux/ConfigStore";
@@ -32,12 +32,22 @@ export default function Header(props: Props) {
         </div>
       </>
     }
-    return <div className="login flex-item">
-      <NavLink className={"carts-link"} to="/login">
-        Login
-      </NavLink>
-    </div>
-
+    return(
+      <Fragment>
+      <div className="login flex-item">
+        <NavLink className={"carts-link"} to="/login">
+          Login
+        </NavLink>
+        
+      </div>
+      <div className="register flex-item">
+              <NavLink className={"carts-link"} to="/register">
+                Register
+              </NavLink>
+            </div>
+            </Fragment>
+    )
+   
   }
   return (
     <div className="header">
@@ -57,11 +67,7 @@ export default function Header(props: Props) {
             </NavLink>
           </div>
           {renderLoginUI()}
-          <div className="register flex-item">
-            <NavLink className={"carts-link"} to="/register">
-              Register
-            </NavLink>
-          </div>
+          
         </div>
       </section>
       <section className="menu d-flex align-items-center">

@@ -24,7 +24,7 @@ export default function Login({ }: Props) {
     },
     validationSchema: yup.object().shape({
       email: yup.string().required('email cannot be blank!').email('email is invalid'),
-      password: yup.string().min(3, 'password must be at least 3 characters')
+      password: yup.string().required('password cannot be blank!')
     }),
     onSubmit: (values: UserLoginModel) => {
       const actionAsyncLogin = loginAsyncApi(values);
