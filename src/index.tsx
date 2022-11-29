@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 // setup react router dom phiên bản 6
-import { BrowserRouter,Routes,Route,Navigate } from 'react-router-dom';
+import { BrowserRouter,Routes,Route,Navigate, unstable_HistoryRouter as HistoryBrowser } from 'react-router-dom';
 import HomeTemplate from './templates/HomeTemplate';
 import Home from './pages/Home/Home'
 import Login from './pages/Login/Login';
@@ -14,13 +14,16 @@ import { store } from './redux/ConfigStore';
 //style
 import './assets/scss/style.scss'
 import Search from './pages/Search/Search';
+import { history } from './util/config';
+
+//setup react router dom
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <Provider store={store}>
- <BrowserRouter>
+     <HistoryBrowser history={history}>
  <Routes>
   <Route path ="" element={<HomeTemplate />} >
   <Route index element = {<Home/>} ></Route>
@@ -34,9 +37,8 @@ root.render(
   </Route>
   <Route path='*' element = {<Navigate to =""/>} ></Route>
   </Route>
-
  </Routes>
- </BrowserRouter>
+ </HistoryBrowser>
  </Provider>
 );
 

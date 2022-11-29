@@ -18,7 +18,7 @@ import { display } from '@mui/system';
 import { colors } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux'
 import { DispatchType, RootState } from '../../redux/ConfigStore'
-import loginReducer, { LoginAction, postSigninApi } from '../../redux/LoginReducer/loginReducer';
+import loginReducer from '../../redux/LoginReducer/loginReducer';
 import { useNavigate, redirect} from 'react-router-dom';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
