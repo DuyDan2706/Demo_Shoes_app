@@ -4,7 +4,12 @@
 
 // components
 @import'./components/header';
-@import'./components/footer.scss'
+@import'./components/footer.scss';
 //page
 
 //template
+
+@import'./components/ChangePassword';
+
+//home
+@import './components/Home'

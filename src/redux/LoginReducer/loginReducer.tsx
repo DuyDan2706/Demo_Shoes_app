@@ -2,7 +2,22 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios';
 import { UserLoginModel } from '../../pages/Login/Login';
 import { ACCESS_TOKEN, history, http, settings, USER_LOGIN } from '../../util/config';
+//change password
 
+export interface Changepass {
+    newPassword: string;
+    newPasswordConfirm:String
+  }
+
+//update profile 
+export interface UpdateProfile {
+    email:    string;
+    password: string;
+    name:     string;
+    gender:   boolean;
+    phone:    string;
+  }
+  
 /* userProfile*/
 export interface UserProfile {
     ordersHistory: OrdersHistory[];
@@ -44,15 +59,17 @@ export interface UserLoginResult {
 export interface UserState {
     userLogin: UserLoginResult,
     userProfile:UserProfile | null
+    updateProfile:UpdateProfile | null
+    changepass :Changepass | null
 }
 
 
 
 const initialState: UserState = {
     userLogin: settings.getStorageJson(USER_LOGIN) ? settings.getStorageJson(USER_LOGIN) : null,
-    userProfile: null
-
-
+    userProfile: null,
+    updateProfile:null,
+    changepass:null
 }
 
 const userReducer = createSlice({
@@ -73,8 +90,15 @@ const userReducer = createSlice({
         builder.addCase(getProfileAsyncApi.fulfilled,(state:UserState,action:PayloadAction<UserProfile>) => {
             state.userProfile = action.payload
         });
+//update
+builder.addCase(getupdateProfileAsyncApi.fulfilled,(state:UserState,action:PayloadAction<UpdateProfile>) => {
+    state.updateProfile = action.payload
+});
 
-     
+//change pass
+builder.addCase(getchangepassAsyncApi.fulfilled,(state:UserState,action:PayloadAction<Changepass>) => {
+    state.changepass = action.payload
+});
     }
 
 
@@ -85,7 +109,7 @@ export default userReducer.reducer
 export const loginAsyncApi = createAsyncThunk(
     'userReducer/loginAsyncApi',
     async (userLogin: UserLoginModel):Promise<UserLoginResult> => {
-        const response = await axios.post(`https://shop.cyberlearn.vn/api/Users/signin`, userLogin);
+        const response = await http.post(`/api/Users/signin`, userLogin);
         return response.data.content;
     }
 );
@@ -96,6 +120,23 @@ export const getProfileAsyncApi = createAsyncThunk(
         return response.data.content;
     }
 );
+
+export const getupdateProfileAsyncApi = createAsyncThunk(
+    'userReducer/getupdateProfileAsyncApi',
+    async ():Promise<UpdateProfile> => {
+        const response = await http.post('/api/Users/updateProfile');
+        return response.data.content;
+    }
+);
+
+export const getchangepassAsyncApi = createAsyncThunk(
+    'userReducer/getchangepassAsyncApi',
+    async ():Promise<Changepass> => {
+        const response = await http.post('/api/Users/changePassword');
+        return response.data.content;
+    }
+);
+
 
 
 

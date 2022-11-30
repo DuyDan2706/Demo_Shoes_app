@@ -73,10 +73,7 @@ export default function Header(props: Props) {
       <section className="menu d-flex align-items-center">
         <nav className="nav-menu">
           <NavLink className="mx-2" to="">Home</NavLink>
-          <NavLink className="mx-2" to="">Men</NavLink>
-          <NavLink className="mx-2" to="">Woman</NavLink>
-          <NavLink className="mx-2" to="">Kid</NavLink>
-          <NavLink className="mx-2" to="">Sport</NavLink>
+         
         </nav>
       </section>
     </div>

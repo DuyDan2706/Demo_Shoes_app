@@ -15,6 +15,7 @@ import { store } from './redux/ConfigStore';
 import './assets/scss/style.scss'
 import Search from './pages/Search/Search';
 import { history } from './util/config';
+import ChangePassword from './pages/ChangePassword/ChangePassword';
 
 //setup react router dom
 
@@ -32,6 +33,7 @@ root.render(
   <Route path='register' element = {<Register/>} ></Route>
   <Route path='cart' element = {<Cart/>} ></Route>
   <Route path='search' element = {<Search/>} ></Route>
+  <Route path='/changepassword' element={<ChangePassword />} />
   <Route path='detail' element = {<Detail/>} >
     <Route path=':id'></Route>
   </Route>

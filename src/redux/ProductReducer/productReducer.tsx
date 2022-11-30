@@ -4,6 +4,10 @@ import axios from 'axios';
 import { DispatchType } from '../ConfigStore';
 //productModel bao gồm các thuộc tính từ Api trả về
 //có thể dùng type hoặc interface ( interface có thể mở rộng cao hơn so với type) 
+
+
+
+
 export interface ProductModel   {
     id: number;
     name: string;
